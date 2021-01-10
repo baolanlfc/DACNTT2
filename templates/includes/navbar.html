@@ -1,0 +1,42 @@
+<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-primary py-1">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="{% url 'index'  %}">Trang chủ</a>
+        
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'about'  %}"><i class="fa fa-phone"></i> Liên hệ</a>
+            </li>
+             <li class="nav-item active">
+              <a class="nav-link" href="{% url 'chat'  %}"><i class="fa fa-comments" aria-hidden="true"></i> Trò chuyện</a>
+            </li>
+           <!--  <li class="nav-item active">
+                <a class="nav-link" href="{% url 'article:articles'  %}">Bài Viết</a>
+            </li> -->
+          </ul>
+          <ul class="navbar-nav ml-auto">
+          {% if request.user.is_authenticated %}
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'article:dashboard'  %}"><i class="fa fa-home"></i> {{request.user.username}}</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'user:logout'  %}"><i class="fa fa-sign-out"></i> Đăng xuất</a>
+          </li>
+          {% else %}
+
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'user:login'  %}"><i class="fa fa-sign-in"></i></i> Đăng nhập</a>
+          </li>
+            <li class="nav-item active">
+            <a class="nav-link" href="{% url 'user:register'  %}"><i class="fa fa-registered"></i> Đăng ký</a>
+          </li>
+          
+          {% endif %}
+        
+          </ul>
+        </div>
+    
+    
+</nav>

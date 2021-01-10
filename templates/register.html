@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+{% load crispy_forms_tags %}
+
+<div class="row">
+
+    <div class="col-md-6 offset-md-3">
+
+        <h3>Đăng ký</h3>
+        <hr>
+        {% if messages %}
+                
+                    {% for message in messages %}
+                    {% if message.tags == "info" %}
+                    <div class="alert alert-danger">{{ message }}</div>
+                    {% else %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                    {% endif %}
+                    {% endfor %}
+         {% endif %}
+        <form method = "post">
+            {% csrf_token %}
+            {{form|crispy}}
+            <br>
+            <button type = "submit" class = "btn btn-danger">Đăng ký</button>
+        </form>
+
+    </div>
+
+  </div>
+
+{% endblock body %}
+
