@@ -2,17 +2,39 @@
 
 {% block body %}
 
-	<div class="jumbotron">
-        <!-- <h3>Bài viết mới nhất!</h3> -->
-       <!--  <iframe width=100% height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" allowtransparency="true" src="https://chatroll.com/embed/chat/phuocblog?id=xgV3Of5xcrg&platform=html"></iframe> -->
-   </div>
-<p>
-        {% if request.user.is_authenticated %}
-                Xin chào, {{request.user.username}}
-        {% else %}
-                Chưa đăng nhập
-        {% endif %}
+<div class="container">
+  
+    <img src="/media/cen_bn_u3TydMQ.jpg" style="width:100%;height: 100%;"/>
 
-</p>
+</div>
+
+<h3 style="margin-top: 30px;margin-bottom: 30px;text-align: center;">Danh sách dòng họ</h3>
+<table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Họ</th>
+            <th scope="col">Tên dòng họ</th>
+            <th scope="col">Địa chỉ</th>
+            <th scope="col">Ngày tạo</th>
+            <th scope="col">Xem</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for family in list_family %}
+          <tr>
+            <td>{{family.id}}</td>
+            <td>{{family.parentage}}</td>
+            <td>{{family.family_name}}</td>
+            <td>{{family.address}}</td>
+            <td>{{family.created_date}}</td>
+            <td><a href="{% url 'family_detail' family.id %}" class = "btn btn-primary">Xem</a></td>
+            
+              
+          </tr>
+          {% endfor %}
+          
+        </tbody>
+      </table>
 {% endblock body %}
 

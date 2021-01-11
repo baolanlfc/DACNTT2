@@ -16,9 +16,7 @@ def articles(request):
     return render(request,"articles.html",{"articles":articles})
 
 def index(request):
-    articles = Article.objects.all()
-    user = "phuoc"
-    return render(request,"articles.html",{"articles":articles,"user":user})
+    return render(request,"index.html")
     
 def about(request):
     return render(request,"about1.html",{"user":request.user})

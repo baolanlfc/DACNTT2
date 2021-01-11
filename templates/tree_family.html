@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{% csrf_token %}
+<div id="example">
+
+    <div class="demo-section k-content">
+        <div>
+            <input type="hidden" id="tree-data" value="{{Data}}"/>
+            <div id="treeview-left"></div>
+        </div>
+    </div>
+
+<script>
+    let data = JSON.parse("[" + $('#tree-data').val().replaceAll('\'','\"') + "]")
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+$("#treeview-left").kendoTreeView({
+    dragAndDrop: true,
+    dragend: onDragEnd,
+    dataSource:  data
+});
+
+function onDragEnd(e) {
+        var drag_item = e.sender.dataItem(e.sourceNode);
+        var destination_item = e.sender.dataItem(e.destinationNode);
+        var url = '/update_tree'
+
+        console.log("Drag -> " + this.text(e.sourceNode)+ "|| Id -> " + drag_item.value);
+        console.log("Destination -> " + this.text(e.destinationNode) + "|| Destination Id -> " + destination_item.value);
+        $.ajax({
+            type: 'post',
+            url: url,
+            data : {
+                drag_item_id : drag_item.value,
+                destination_item_id : destination_item.value
+            },
+            headers: {'X-CSRFToken': csrftoken},
+            success: function(response) {
+             (response.status == "success") ? message.success(response.msg) : message.error(response.msg);
+            }
+        });
+    }
+let treeview =  $("#treeview-left").data("kendoTreeView");
+treeview.expand(".k-item");
+
+</script>
+{% endblock body %}

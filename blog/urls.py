@@ -17,15 +17,17 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
-
-
+from family import views as familyView
 from article import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.index,name = "index"),
+    path('',familyView.listFamily,name = "index"),
+    path('family/detail/<int:id>',familyView.familyDetail,name = "family_detail"),
     path('about/',views.about,name = "about"),
     path('articles/',include("article.urls")),
     path('user/',include("user.urls")),
     path('chat/', include('chat.urls')),
+    path('tree_family/<int:id>', familyView.show_tree,name = "tree_family"),
+    path('update_tree', familyView.update_tree,name = 'tree_family.update')
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
