@@ -60,9 +60,8 @@ def updateArticle(request,id):
 
         messages.success(request,"Bai viet cap nhat thanh cong")
         return redirect("article:dashboard")
-
-
     return render(request,"update.html",{"form":form})
+    
 @login_required(login_url = "user:login")
 def deleteArticle(request,id):
     article = get_object_or_404(Article,id = id)

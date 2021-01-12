@@ -5,8 +5,8 @@ from .models import Family, Member
 
 @admin.register(Family)
 class FamilyAdmin(admin.ModelAdmin):
-    list_display = ['parentage','family_name', 'address', 'intro', 'created_date']
-    list_filter = ['created_date']
+    list_display = ['parentage','family_name', 'address', 'intro', 'created_date','status']
+    list_filter = ['created_date','status']
     search_fields = ['family_name']
 
 @admin.register(Member)

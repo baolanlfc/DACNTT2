@@ -9,10 +9,15 @@
 </div>
 
 <h3 style="margin-top: 30px;margin-bottom: 30px;text-align: center;">Danh sách dòng họ</h3>
+<form>
+  {% csrf_token %} 
+ <input type="text" name = "keyword" class="input-lg" maxlength="100" placeholder="Nhập mã số">
+<button type="submit" class="btn btn-primary">Tìm kiếm</button>
+</form>
 <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">id</th>
+            <th scope="col">Mã số</th>
             <th scope="col">Họ</th>
             <th scope="col">Tên dòng họ</th>
             <th scope="col">Địa chỉ</th>

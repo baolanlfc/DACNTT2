@@ -15,6 +15,7 @@
           <div id="general-info" class="tabcontent">
               <div class="row" style="margin:1rem 0">
                 <div class="col-md-2">
+                    <p class='general-info-props'>Mã số</p>
                     <p class='general-info-props'>Họ</p>
                     <p class='general-info-props'>Tên dòng họ</p>
                     <p class='general-info-props'>Nguyên quán</p>
@@ -22,7 +23,8 @@
                     <p class='general-info-props'>Ngày lập</p>
                     <p class='general-info-props'>Người lập</p>
                 </div>
-                <div class="col-md-10">
+                <div class="col-md-8">
+                    <p>{{Data.id}}</p>
                     <p>{{Data.parentage}}</p>
                     <p>{{Data.family_name}}</p>
                     <p>{{Data.address}}</p>
@@ -30,6 +32,9 @@
                     <p>{{Data.created_date}}</p>
                     <p>{{Data.created_user}}</p>
                 </div>
+                <div class="col-md-2">
+                <a href="/family/update/{{Data.id}}" style="display: {{ Data.is_update_family }}" class="btn btn-primary">Chỉnh sửa</a>
+              </div>
               </div>
               <hr style="border-color:black">
 
@@ -45,8 +50,9 @@
                     <th scope="col">Họ tên</th>
                     <th scope="col">Ngày sinh</th>
                     <th scope="col">Giới tính</th>
-                    <th scope="col">Tên vợ/chồng</th>
+                    <th scope="col">Vợ/Chồng</th>
                     <th scope="col">Hiện trạng</th>
+                    <th scope="col"><a href="/family/{{Data.id}}/add_member/" class="btn btn-success" style="display: {{ Data.is_update_family }};color: white">Thêm</a></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -54,10 +60,11 @@
                   <tr>
                     <td><img src="/media/{{member.member_image}}" style="width:50px;height:50px"/></td>
                     <td>{{member.real_name}}</td>
-                    <td>{{member.birth_date}}</td>
+                    <td>{{member.birth_date|default:"Không rõ"}}</td>
                     <td>{{member.gender}}</td>
-                    <td>{{member.partner_name}}</td>
+                    <td>{{member.partner_name|default:""}}</td>
                     <td>{{member.live_status}}</td>
+                    <td><a href="/family/member/{{member.id}}/update/" style="display: {{ Data.is_update_family }}" class="btn btn-primary">Sửa</a></td>
 
                   </tr>
                   {% endfor %}
